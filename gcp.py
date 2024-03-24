@@ -2,6 +2,7 @@ from google.cloud import aiplatform
 from google.oauth2 import service_account
 import base64
 import json
+import streamlit as st
 
 
 # GCP SERVICE ACCOUNT UNIQUE ID 
@@ -13,9 +14,8 @@ ENDPOINT_ID = "6120385296526737408"
 
 def predict(text):
     """
-    
-    """
 
+    """
 
     # Cria dado para ser analisado pelo modelo treinado utilizando o servico GCP Vertex AI
     # Como o dataset de treino utiliza apenas a coluna 'descricao_reclamacao_processed'
@@ -27,16 +27,14 @@ def predict(text):
         },
     ]   
 
-
-    # Read text file with the encoded authentication info
-    with open('encoded-auth.txt', 'r') as encoded_file:
-        encoded_string = encoded_file.read()
+    # Get encoded authentication info from Streamlit Secret Management
+    encoded_string = st.secrets["gcp_b64encoded_gcp_auth_json"]
 
     # Decode the string back to JSON
     decoded_auth_bytes = base64.b64decode(encoded_string)
     decoded_auth_json = json.loads(decoded_auth_bytes.decode('utf-8'))
 
-    # Creating credentials using the key file
+    # Creating credentials using the key file (encoded as b64 string)
     my_credentials = service_account.Credentials.from_service_account_info(
         decoded_auth_json
     )
