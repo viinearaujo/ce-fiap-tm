@@ -1,0 +1,4 @@
+__pycache__/
+my-env/
+processed_file.csv
+*.json
