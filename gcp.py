@@ -4,17 +4,25 @@ import base64
 import json
 import streamlit as st
 
-
 # GCP SERVICE ACCOUNT UNIQUE ID 
 SAC_UNIQUEID = "115532493627132210234"
 
 # GCP ENDPOINT ID
 ENDPOINT_ID = "6120385296526737408"
 
-
 def predict(text):
     """
+    Realiza o Predict utilizando o Modelo criado/treinado utilizando o dataset
+    fornecido pelo professor. O dataset foi preprocessado pelo notebook
+    preprocess_dataset.ipynb - que tambem o adequou para o formato de dataset
+    esperado pelo GCP Vertex AI - seguindo a documentacao vigente.
 
+    Parâmetros:
+        text (str): Texto que será analisado pelo modelo.
+
+    Retorna:
+        dict: Dicionario com Labels (Categorias) reconhecidas pelo modelo
+        e seus Scores.
     """
 
     # Cria dado para ser analisado pelo modelo treinado utilizando o servico GCP Vertex AI
@@ -69,3 +77,28 @@ def predict(text):
     prediction = response.predictions[0]
 
     return prediction
+
+def get_top_confidence_category(text):
+    """
+    Realiza a predição das categorias com base no texto fornecido, 
+    selecionando a categoria com maior nível de confiança ('Confidence')
+    gerada pelo modelo. Este método destina-se a identificar a 
+    categoria mais provável para apresentação no aplicativo web Streamlit.
+
+    Parâmetros:
+        text (str): Texto que será analisado pelo modelo.
+
+    Retorna:
+        str: O label da categoria com maior confiança prevista pelo modelo.
+    """
+
+    # Make prediction
+    prediction = predict(text)
+
+    # Find the index of the highest score
+    max_score_index = prediction['scores'].index(max(prediction['scores']))
+
+    # Use the index to find the corresponding class (Categoria)
+    categoria = prediction['classes'][max_score_index]
+
+    return categoria
