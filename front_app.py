@@ -1,9 +1,9 @@
 import streamlit as st
 from gcp import get_top_confidence_category
-import setup_spacy as ss
 from spacy.lang.pt.stop_words import STOP_WORDS
+import spacy
 
-nlp = ss.download_spacy_model()
+nlp = spacy.load('pt_core_news_sm')
 
 # Function to clean and lemmatize text
 def clean_and_lemmatize(text):
