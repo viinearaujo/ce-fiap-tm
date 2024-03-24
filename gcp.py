@@ -1,10 +1,13 @@
 from google.cloud import aiplatform
 from google.oauth2 import service_account
+import base64
+import json
 
-# Path to your service account key file
-SAC_KEY_FP = "topic-modelling-fiap-417601-432750c09ce7.json"
+
+
 SAC_UNIQUEID = "115532493627132210234"
 ENDPOINT_ID = "6120385296526737408"
+
 
 
 def predict(text):
@@ -15,10 +18,19 @@ def predict(text):
             text
         },
     ]   
-    
+
+
+    # Load the encoded string from the new text file
+    with open('encoded-auth.txt', 'r') as encoded_file:
+        encoded_string = encoded_file.read()
+
+    # Decode the string back to JSON
+    decoded_auth_bytes = base64.b64decode(encoded_string)
+    decoded_auth_json = json.loads(decoded_auth_bytes.decode('utf-8'))
+
     # Creating credentials using the key file
     my_credentials = service_account.Credentials.from_service_account_file(
-        SAC_KEY_FP
+        decoded_auth_json
     )
 
     aiplatform.init(
