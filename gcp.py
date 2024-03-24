@@ -29,7 +29,7 @@ def predict(text):
     decoded_auth_json = json.loads(decoded_auth_bytes.decode('utf-8'))
 
     # Creating credentials using the key file
-    my_credentials = service_account.Credentials.from_service_account_file(
+    my_credentials = service_account.Credentials.from_service_account_info(
         decoded_auth_json
     )
 
