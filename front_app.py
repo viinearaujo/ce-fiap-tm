@@ -1,13 +1,8 @@
 import streamlit as st
 from gcp import predict
 
-# Placeholder for your model loading function
-# def load_model():
-#     # Load your trained model
-#     return model
 
-# Placeholder for your prediction function
-# Replace this with your actual model prediction logic
+
 def get_best_category_prediction(text):
 
     # Make prediction
@@ -24,26 +19,24 @@ def get_best_category_prediction(text):
 
     return best_class
 
-# Initialize your model (uncomment and modify the following line according to your model loading function)
-# model = load_model()
+
 
 # Streamlit app layout
 st.title("Cloud Topic Modeling App")
 
 
-
 # Text input
-user_input = st.text_area("Enter the text to classify", "")
+user_input = st.text_area("Escreva abaixo o texto do chamado para ser classificado", "")
 
 if st.button('Predict'):
     if user_input:  # Check if there is an input
         predicted_category = get_best_category_prediction(user_input)
-        st.markdown(f"### Predicted Category:")
+        st.markdown(f"### Categoria predita:")
         
         # Display the category in green
         st.markdown(f"<h1 style='color: green;'>{predicted_category}</h1>", unsafe_allow_html=True)
     else:
-        st.write("Please enter some text to classify.")
+        st.write("Por favor, insira o texto do chamado para ser classificado.")
 
 
 
