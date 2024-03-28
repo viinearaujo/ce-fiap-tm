@@ -3,3 +3,4 @@ my-env/
 processed_file.csv
 *.json
 *.toml
+*.txt
