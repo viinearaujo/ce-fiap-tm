@@ -11,7 +11,7 @@ This repository contains my MBA project for the Cognitive Environments class, fo
 - **preprocess_dataset.ipynb**: A Jupyter notebook for retrieving, preprocessing the dataset using the SPACY library for Brazilian Portuguese text, lemmatizing, cleaning up the dataset, and formatting it for Vertex AI.
 - **requirements.txt**: Lists all the dependencies required to run the project.
 - **tm-fiap-predict.ipynb**: A sandbox notebook for testing and ensuring the envisioned functionalities work correctly.
-- - **tm-fiap-createGCPArtifactsUsingGoogleSDK-sandbox.ipynb**: A sandbox notebook for testing and playing around with the Google SDK - created with the purpose of testing SDK's functionalities of creating some of the required artifacts for the project.
+- **tm-fiap-createGCPArtifactsUsingGoogleSDK-sandbox.ipynb**: A sandbox notebook for testing and playing around with the Google SDK - created with the purpose of testing SDK's functionalities of creating some of the required artifacts for the project.
 
 ## Getting Started
 
